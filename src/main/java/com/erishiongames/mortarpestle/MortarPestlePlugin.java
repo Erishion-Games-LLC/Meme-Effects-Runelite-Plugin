@@ -56,7 +56,6 @@ public class MortarPestlePlugin extends Plugin
 	@Subscribe
 	public void onAnimationChanged(AnimationChanged animationChanged){
 		currentAnimationID = animationChanged.getActor().getAnimation();
-		log.info(String.valueOf(currentAnimationID));
 		if(currentAnimationID == 364){
 			soundEngine.playClip(Sound.MORTAR_PESTLE_BONK);
 		}

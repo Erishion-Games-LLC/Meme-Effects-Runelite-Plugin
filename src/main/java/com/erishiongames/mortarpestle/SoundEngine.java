@@ -28,8 +28,7 @@ public class SoundEngine {
             }
             return true;
         }
-            catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                log.warn("Failed to load sound " + sound, e);
+            catch (UnsupportedAudioFileException | IOException | LineUnavailableException ignored) {
             }
             return false;
         }
@@ -45,7 +44,6 @@ public class SoundEngine {
             }
             catch (LineUnavailableException e) {
                 lastClipMTime = CLIP_MTIME_UNLOADED;
-                log.warn("Failed to get clip " + sound, e);
                 return;
             }
 
