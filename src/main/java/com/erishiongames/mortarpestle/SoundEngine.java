@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.sound.sampled.*;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 @Singleton
 @Slf4j
@@ -19,39 +17,40 @@ public class SoundEngine {
     private MortarPestlePluginConfig config;
 
     private static final long CLIP_MTIME_UNLOADED = -2;
-
     private long lastClipMTime = CLIP_MTIME_UNLOADED;
     private Clip clip = null;
 
-    private boolean loadClip(Sounds sounds) {
-        try (InputStream stream = new BufferedInputStream(SoundFileManager.getSoundStream(sounds))) {
+
+    private boolean loadClip(Sound sound) {
+        try (InputStream stream = new BufferedInputStream(SoundFileManager.getSoundStream(sound))) {
             try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(stream)) {
                 clip.open(audioInputStream); // liable to error with pulseaudio, works on windows, one user informs me mac works
             }
             return true;
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            log.warn("Failed to load sound " + sounds, e);
         }
-        return false;
-    }
+            catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                log.warn("Failed to load sound " + sound, e);
+            }
+            return false;
+        }
 
-    public void playClip(Sounds sounds) {
+    public void playClip(Sound sound) {
         long currentMTime = System.currentTimeMillis();
         if (clip == null || currentMTime != lastClipMTime || !clip.isOpen()) {
             if (clip != null && clip.isOpen()) {
                 clip.close();
             }
 
-            try {
-                clip = AudioSystem.getClip();
-            } catch (LineUnavailableException e) {
+            try { clip = AudioSystem.getClip();
+            }
+            catch (LineUnavailableException e) {
                 lastClipMTime = CLIP_MTIME_UNLOADED;
-                log.warn("Failed to get clip " + sounds, e);
+                log.warn("Failed to get clip " + sound, e);
                 return;
             }
 
             lastClipMTime = currentMTime;
-            if (!loadClip(sounds)) {
+            if (!loadClip(sound)) {
                 return;
             }
         }

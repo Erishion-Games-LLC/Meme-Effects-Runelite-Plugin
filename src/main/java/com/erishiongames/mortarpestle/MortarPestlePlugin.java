@@ -7,13 +7,17 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.events.GameStateChanged;
+import net.runelite.api.events.GameTick;
 import net.runelite.api.events.SoundEffectPlayed;
+import net.runelite.client.RuneLite;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import okhttp3.OkHttpClient;
 
+import java.io.File;
 import java.util.concurrent.ScheduledExecutorService;
 
 @Slf4j
@@ -22,6 +26,8 @@ import java.util.concurrent.ScheduledExecutorService;
 )
 public class MortarPestlePlugin extends Plugin
 {
+	private boolean playSound = false;
+
 	@Inject
 	private Client client;
 
@@ -37,29 +43,38 @@ public class MortarPestlePlugin extends Plugin
 	@Inject
 	private SoundEngine soundEngine;
 
+
 	@Override
 	protected void startUp() throws Exception
 	{
-		executor.submit(() -> {
-			SoundFileManager.ensureDownloadDirectoryExists();
-			SoundFileManager.downloadAllMissingSounds(okHttpClient);});
+
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Example stopped!");
+
 	}
 
 	@Subscribe
-	public void onSoundEffectPlayed(SoundEffectPlayed soundEffectPlayed){
-		System.out.println(soundEffectPlayed.getSoundId());
+	public void onSoundEffectPlayed(SoundEffectPlayed soundEffectPlayed) {
+
+		boolean wasPlaying = false;
 		if (soundEffectPlayed.getSoundId() == SoundEffectIds.MORTAR_AND_PESTLE){
 			soundEffectPlayed.consume();
-			System.out.println("consumed");
-			soundEngine.playClip(Sounds.MORTAR_PESTLE_BONK);
+			playSound = true;
+			soundEngine.playClip(Sound.MORTAR_PESTLE_BONK);
+
+			}
 		}
-	}
+
+	@Subscribe
+	public void onGameTick(GameTick gameTick){
+//		if(playSound){
+//			soundEngine.playClip(Sound.MORTAR_PESTLE_BONK);
+//			playSound = false;
+//			}
+		}
 
 
 	@Provides

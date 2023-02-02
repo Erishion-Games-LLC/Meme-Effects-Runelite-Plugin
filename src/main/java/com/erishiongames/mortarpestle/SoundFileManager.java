@@ -24,12 +24,10 @@ import java.util.Set;
 @Slf4j
 public abstract class SoundFileManager {
 
-    //Copied from https://github.com/m0bilebtw/c-engineer-completed/blob/master/src/main/java/com/github/m0bilebtw/SoundFileManager.java
-
     private static final File DOWNLOAD_DIR = new File(RuneLite.RUNELITE_DIR.getPath() + File.separator + "MortarPestle");
     private static final String DELETE_WARNING_FILENAME = "EXTRA_FILES_WILL_BE_DELETED_BUT_FOLDERS_WILL_REMAIN";
     private static final File DELETE_WARNING_FILE = new File(DOWNLOAD_DIR, DELETE_WARNING_FILENAME);
-    private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/Erishion-Games-LLC/Mortar_Pestle_Runelite_Plugin/sounds");
+    private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/m0bilebtw/c-engineer-completed/sounds");
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void ensureDownloadDirectoryExists() {
@@ -55,9 +53,9 @@ public abstract class SoundFileManager {
         }
 
         // Download any sounds that are not yet present but exist in Sound enum
-        Sounds[] allSounds = Sounds.values();
-        for (Sounds sounds : allSounds) {
-            String fileName = sounds.getResourceName();
+        Sound[] allSounds = Sound.values();
+        for (Sound sound : allSounds) {
+            String fileName = sound.getResourceName();
             if (filesPresent.contains(fileName)) {
                 filesPresent.remove(fileName);
                 continue;
@@ -65,7 +63,7 @@ public abstract class SoundFileManager {
 
             if (RAW_GITHUB == null) {
                 // Hush intellij, it's okay, the potential NPE can't hurt you now
-                log.error("Could not download sounds due to an unexpected null RAW_GITHUB value");
+                log.error("C Engineer Completed could not download sounds due to an unexpected null RAW_GITHUB value");
                 return;
             }
             HttpUrl soundUrl = RAW_GITHUB.newBuilder().addPathSegment(fileName).build();
@@ -74,7 +72,7 @@ public abstract class SoundFileManager {
                 if (res.body() != null)
                     Files.copy(new BufferedInputStream(res.body().byteStream()), outputPath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
-                log.error("Could not download sounds", e);
+                log.error("C Engineer Completed could not download sounds", e);
                 return;
             }
         }
@@ -90,7 +88,7 @@ public abstract class SoundFileManager {
         }
     }
 
-    public static InputStream getSoundStream(Sounds sounds) throws FileNotFoundException {
-        return new FileInputStream(new File(DOWNLOAD_DIR, sounds.getResourceName()));
+    public static InputStream getSoundStream(Sound sound) throws FileNotFoundException {
+        return new FileInputStream(new File(DOWNLOAD_DIR, sound.getResourceName()));
     }
 }

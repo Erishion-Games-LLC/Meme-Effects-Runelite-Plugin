@@ -1,15 +1,15 @@
 package com.erishiongames.mortarpestle;
 
-public enum Sounds {
+public enum Sound {
 
-    MORTAR_PESTLE_BONK("MortarPestleBonk_r1.wav"),
+    MORTAR_PESTLE_BONK("Bonk.wav"),
     ;
 
 
 
     private final String resourceName;
 
-    Sounds(String resourceName){
+    Sound(String resourceName){
         this.resourceName = resourceName;
     }
 
