@@ -14,7 +14,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Mortar Pestle"
+	name = "Mortar Pestle Bonk"
 )
 public class MortarPestlePlugin extends Plugin
 {

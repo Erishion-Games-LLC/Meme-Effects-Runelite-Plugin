@@ -1,2 +1,2 @@
-# Example
-An example greeter plugin
+# Mortar Pestle Bonk
+A plugin that changes the sounds of the mortar and pestle when crushing items to play a bonking sound
