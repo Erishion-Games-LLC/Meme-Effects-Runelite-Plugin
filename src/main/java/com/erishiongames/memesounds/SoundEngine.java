@@ -1,4 +1,4 @@
-package com.erishiongames.mortarpestle;
+package com.erishiongames.memesounds;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,7 +14,7 @@ public class SoundEngine {
     //Copied from https://github.com/m0bilebtw/c-engineer-completed/blob/master/src/main/java/com/github/m0bilebtw/SoundEngine.java
 
     @Inject
-    private MortarPestlePluginConfig config;
+    private MemeSoundsPluginConfig config;
 
     private static final long CLIP_MTIME_UNLOADED = -2;
     private long lastClipMTime = CLIP_MTIME_UNLOADED;

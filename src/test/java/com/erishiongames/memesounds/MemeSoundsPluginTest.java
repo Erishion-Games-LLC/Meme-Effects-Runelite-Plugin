@@ -1,14 +1,14 @@
-package com.erishiongames;
+package com.erishiongames.memesounds;
 
-import com.erishiongames.mortarpestle.MortarPestlePlugin;
+import com.erishiongames.memesounds.MemeSoundsPlugin;
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class MortarPestlePluginTest
+public class MemeSoundsPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(MortarPestlePlugin.class);
+		ExternalPluginManager.loadBuiltin(MemeSoundsPlugin.class);
 		RuneLite.main(args);
 	}
 }

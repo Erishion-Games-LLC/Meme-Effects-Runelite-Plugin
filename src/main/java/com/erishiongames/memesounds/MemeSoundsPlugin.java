@@ -1,4 +1,4 @@
-package com.erishiongames.mortarpestle;
+package com.erishiongames.memesounds;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -14,9 +14,9 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Mortar Pestle Bonk"
+	name = "Meme Sounds"
 )
-public class MortarPestlePlugin extends Plugin
+public class MemeSoundsPlugin extends Plugin
 {
 	private int currentAnimationID = 0;
 
@@ -24,7 +24,7 @@ public class MortarPestlePlugin extends Plugin
 	private Client client;
 
 	@Inject
-	private MortarPestlePluginConfig config;
+	private MemeSoundsPluginConfig config;
 
 	@Inject
 	private ScheduledExecutorService executor;
@@ -70,8 +70,8 @@ public class MortarPestlePlugin extends Plugin
 	}
 
 	@Provides
-	MortarPestlePluginConfig provideConfig(ConfigManager configManager)
+	MemeSoundsPluginConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(MortarPestlePluginConfig.class);
+		return configManager.getConfig(MemeSoundsPluginConfig.class);
 	}
 }

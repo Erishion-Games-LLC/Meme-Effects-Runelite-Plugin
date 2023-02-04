@@ -1,4 +1,4 @@
-package com.erishiongames.mortarpestle;
+package com.erishiongames.memesounds;
 
 public enum Sound {
 
