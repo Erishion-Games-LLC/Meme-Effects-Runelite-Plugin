@@ -24,19 +24,10 @@
  */
 package com.erishiongames.memesounds;
 
-public enum Sound {
+public class AnimationIds {
 
-    MORTAR_PESTLE_BONK("Bonk.wav"),
-    ;
+    public static final int MORTAR_AND_VIAL_ANIMATION_ID = 363;
+    public static final int MORTAR_AND_PESTLE_ANIMATION_ID = 364;
 
-    private final String resourceName;
-
-    Sound(String resourceName){
-        this.resourceName = resourceName;
-    }
-
-    public String getResourceName() {
-        return resourceName;
-    }
 
 }
