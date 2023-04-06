@@ -25,19 +25,14 @@
 package com.erishiongames.memesounds;
 
 import com.google.inject.Provides;
-import java.net.http.HttpClient;
 import javax.inject.Inject;
-import javax.inject.Named;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.VarPlayer;
-import net.runelite.api.Varbits;
 import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import java.util.concurrent.ScheduledExecutorService;
 
