@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.erishiongames.memesounds;
+package com.erishiongames.memeeffects;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -38,18 +38,18 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Meme Sounds"
+	name = "Meme Effects"
 )
-public class MemeSoundsPlugin extends Plugin
+public class MemeEffectsPlugin extends Plugin
 {
-	public static final String CONFIG_GROUP = "memesounds";
+	public static final String CONFIG_GROUP = "memeeffects";
 	private int currentAnimationID = 0;
 
 	@Inject
 	private Client client;
 
 	@Inject
-	private MemeSoundsPluginConfig config;
+	private MemeEffectsPluginConfig config;
 
 	@Inject
 	private ScheduledExecutorService executor;
@@ -105,8 +105,8 @@ public class MemeSoundsPlugin extends Plugin
 	}
 
 	@Provides
-	MemeSoundsPluginConfig provideConfig(ConfigManager configManager)
+	MemeEffectsPluginConfig provideConfig(ConfigManager configManager)
 	{
-		return configManager.getConfig(MemeSoundsPluginConfig.class);
+		return configManager.getConfig(MemeEffectsPluginConfig.class);
 	}
 }

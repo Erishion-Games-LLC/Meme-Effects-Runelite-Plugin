@@ -22,39 +22,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.erishiongames.memesounds;
+package com.erishiongames.memeeffects;
 
-import net.runelite.client.config.Config;
-import net.runelite.client.config.ConfigGroup;
-import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.ConfigSection;
-
-@ConfigGroup(MemeSoundsPlugin.CONFIG_GROUP)
-public interface MemeSoundsPluginConfig extends Config
+public final class SoundEffectIds
 {
-	@ConfigItem(
-			keyName = "memeSoundsVolume",
-			name = "Volume",
-			description = "Adjust how loud the sound effect is",
-			position = 0
-	)
-	default int memeSoundsVolume() {return 100;}
-
-
-	@ConfigSection(
-			name = "Mortar and Pestle Bonk",
-			description = "Configuration Values",
-			position = 1
-	)
-	String mortarPestleBonk = "Mortar and Pestle Bonk";
-
-
-		@ConfigItem(
-				keyName = "enableMortarPestleBonk",
-				name = "Enable",
-				description = "Enable sound effects",
-				position = 0,
-				section = mortarPestleBonk
-		)
-		default boolean enableMortarPestleBonk() {return true;}
+    public static final int MORTAR_AND_PESTLE = 2608;
 }

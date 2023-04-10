@@ -22,12 +22,21 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.erishiongames.memesounds;
+package com.erishiongames.memeeffects;
 
-public class AnimationIds {
+public enum Sound {
 
-    public static final int MORTAR_AND_VIAL_ANIMATION_ID = 363;
-    public static final int MORTAR_AND_PESTLE_ANIMATION_ID = 364;
+    MORTAR_PESTLE_BONK("Bonk.wav"),
+    ;
 
+    private final String resourceName;
+
+    Sound(String resourceName){
+        this.resourceName = resourceName;
+    }
+
+    public String getResourceName() {
+        return resourceName;
+    }
 
 }

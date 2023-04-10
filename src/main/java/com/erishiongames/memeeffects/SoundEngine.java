@@ -23,7 +23,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.erishiongames.memesounds;
+package com.erishiongames.memeeffects;
 
 import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
@@ -41,7 +41,7 @@ public class SoundEngine {
     //Copied from https://github.com/m0bilebtw/c-engineer-completed/blob/master/src/main/java/com/github/m0bilebtw/SoundEngine.java
 
     @Inject
-    private MemeSoundsPluginConfig config;
+    private MemeEffectsPluginConfig config;
 
     private static final long CLIP_MTIME_UNLOADED = -2;
     private long lastClipMTime = CLIP_MTIME_UNLOADED;

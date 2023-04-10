@@ -1,14 +1,13 @@
-package com.erishiongames.memesounds;
+package com.erishiongames.memeeffects;
 
-import com.erishiongames.memesounds.MemeSoundsPlugin;
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class MemeSoundsPluginTest
+public class MemeEffectsPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(MemeSoundsPlugin.class);
+		ExternalPluginManager.loadBuiltin(MemeEffectsPlugin.class);
 		RuneLite.main(args);
 	}
 }

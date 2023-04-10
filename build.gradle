@@ -23,7 +23,7 @@ dependencies {
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'com.erishiongames.memesounds'
+group = 'com.erishiongames.memeeffects'
 version = '1.0'
 sourceCompatibility = '1.8'
 

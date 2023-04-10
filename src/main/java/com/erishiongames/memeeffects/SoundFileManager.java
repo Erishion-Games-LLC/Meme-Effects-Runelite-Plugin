@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.erishiongames.memesounds;
+package com.erishiongames.memeeffects;
 
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.RuneLite;
@@ -50,7 +50,7 @@ public abstract class SoundFileManager {
 
     //Copied from https://github.com/m0bilebtw/c-engineer-completed/blob/master/src/main/java/com/github/m0bilebtw/SoundFileManager.java
 
-    private static final File DOWNLOAD_DIR = new File(RuneLite.RUNELITE_DIR.getPath() + File.separator + MemeSoundsPlugin.CONFIG_GROUP);
+    private static final File DOWNLOAD_DIR = new File(RuneLite.RUNELITE_DIR.getPath() + File.separator + MemeEffectsPlugin.CONFIG_GROUP);
     private static final String DELETE_WARNING_FILENAME = "EXTRA_FILES_WILL_BE_DELETED_BUT_FOLDERS_WILL_REMAIN";
     private static final File DELETE_WARNING_FILE = new File(DOWNLOAD_DIR, DELETE_WARNING_FILENAME);
     private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/Erishion-Games-LLC/Meme-Sounds-Runelite-Plugin/master/sounds");
