@@ -27,7 +27,7 @@ public class SoundManager
 
 	public void tryPlayMortarPestleBonk(int currentAnimationID){
 		if(currentAnimationID == AnimationIds.MORTAR_AND_PESTLE.getAnimationID()){
-			soundEngine.playClip(Sound.MORTAR_PESTLE_BONK);
+			soundEngine.playClip(SoundFiles.MORTAR_PESTLE_BONK);
 		}
 	}
 

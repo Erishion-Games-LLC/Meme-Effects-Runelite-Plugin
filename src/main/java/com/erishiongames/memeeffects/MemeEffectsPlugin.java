@@ -24,17 +24,15 @@
  */
 package com.erishiongames.memeeffects;
 
+import com.erishiongames.memeeffects.messages.MessageManager;
 import com.erishiongames.memeeffects.sounds.SoundFileManager;
 import com.erishiongames.memeeffects.sounds.SoundManager;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.MessageNode;
-import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.EventBus;
-import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import okhttp3.OkHttpClient;
@@ -64,6 +62,9 @@ public class MemeEffectsPlugin extends Plugin
 	private SoundManager soundManager;
 
 	@Inject
+	private MessageManager messageManager;
+
+	@Inject
 	private EventBus eventBus;
 
 
@@ -71,6 +72,7 @@ public class MemeEffectsPlugin extends Plugin
 	protected void startUp() throws Exception
 	{
 		eventBus.register(soundManager);
+		eventBus.register(messageManager);
 
 		executor.submit(() -> {
 			SoundFileManager.ensureDownloadDirectoryExists();
@@ -82,30 +84,8 @@ public class MemeEffectsPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		eventBus.unregister(soundManager);
+		eventBus.unregister(messageManager);
 	}
-
-	@Subscribe
-	public void onOverheadTextChanged(OverheadTextChanged textChanged)
-	{
-		if(textChanged.getOverheadText().equals("Smashing!"))
-		{
-			textChanged.getActor().setOverheadText("Rock and Stone!");
-		}
-	}
-
-	@Subscribe
-	public void onChatMessage(ChatMessage chatMessage)
-	{
-		if(chatMessage.getMessage().equals("Smashing!"))
-		{
-			MessageNode messageNode = chatMessage.getMessageNode();
-			messageNode.setValue("Rock and Stone");
-
-			chatMessage.setMessageNode(messageNode);
-		}
-	}
-
-
 
 	@Provides
 	MemeEffectsPluginConfig provideConfig(ConfigManager configManager)

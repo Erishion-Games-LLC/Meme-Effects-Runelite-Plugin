@@ -24,14 +24,14 @@
  */
 package com.erishiongames.memeeffects.sounds;
 
-public enum Sound {
-
+public enum SoundFiles
+{
     MORTAR_PESTLE_BONK("Bonk.wav"),
     ;
 
     private final String resourceName;
 
-    Sound(String resourceName){
+    SoundFiles(String resourceName){
         this.resourceName = resourceName;
     }
 

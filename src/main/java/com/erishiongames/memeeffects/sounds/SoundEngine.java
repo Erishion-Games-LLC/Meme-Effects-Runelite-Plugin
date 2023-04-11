@@ -49,7 +49,7 @@ public class SoundEngine {
     private Clip clip = null;
 
 
-    private boolean loadClip(Sound sound) {
+    private boolean loadClip(SoundFiles sound) {
         try (InputStream stream = new BufferedInputStream(SoundFileManager.getSoundStream(sound))) {
             try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(stream)) {
                 clip.open(audioInputStream); // liable to error with pulseaudio, works on windows, one user informs me mac works
@@ -61,7 +61,7 @@ public class SoundEngine {
             return false;
         }
 
-    public void playClip(Sound sound) {
+    public void playClip(SoundFiles sound) {
         long currentMTime = System.currentTimeMillis();
         if (clip == null || currentMTime != lastClipMTime || !clip.isOpen()) {
             if (clip != null && clip.isOpen()) {
@@ -83,7 +83,7 @@ public class SoundEngine {
 
         // User configurable volume
         FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        float gain = 20f * (float) Math.log10(config.memeSoundsVolume() / 100f);
+        float gain = 20f * (float) Math.log10(config.Volume() / 100f);
         gain = Math.min(gain, volume.getMaximum());
         gain = Math.max(gain, volume.getMinimum());
         volume.setValue(gain);

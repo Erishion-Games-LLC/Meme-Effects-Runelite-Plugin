@@ -79,9 +79,9 @@ public abstract class SoundFileManager {
                     .forEach(filesPresent::add);
         }
 
-        // Download any sounds that are not yet present but exist in Sound enum
-        Sound[] allSounds = Sound.values();
-        for (Sound sound : allSounds) {
+        // Download any sounds that are not yet present but exist in SoundFiles enum
+        SoundFiles[] allSounds = SoundFiles.values();
+        for (SoundFiles sound : allSounds) {
             String fileName = sound.getResourceName();
             if (filesPresent.contains(fileName)) {
                 filesPresent.remove(fileName);
@@ -115,7 +115,7 @@ public abstract class SoundFileManager {
         }
     }
 
-    public static InputStream getSoundStream(Sound sound) throws FileNotFoundException {
+    public static InputStream getSoundStream(SoundFiles sound) throws FileNotFoundException {
         return new FileInputStream(new File(DOWNLOAD_DIR, sound.getResourceName()));
     }
 }
