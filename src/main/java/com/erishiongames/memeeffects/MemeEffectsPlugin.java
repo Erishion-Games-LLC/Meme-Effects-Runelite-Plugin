@@ -24,12 +24,16 @@
  */
 package com.erishiongames.memeeffects;
 
+import com.erishiongames.memeeffects.sounds.SoundFileManager;
+import com.erishiongames.memeeffects.sounds.SoundManager;
 import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
+import net.runelite.api.MessageNode;
 import net.runelite.api.events.*;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -43,7 +47,6 @@ import java.util.concurrent.ScheduledExecutorService;
 public class MemeEffectsPlugin extends Plugin
 {
 	public static final String CONFIG_GROUP = "memeeffects";
-	private int currentAnimationID = 0;
 
 	@Inject
 	private Client client;
@@ -58,12 +61,17 @@ public class MemeEffectsPlugin extends Plugin
 	private OkHttpClient okHttpClient;
 
 	@Inject
-	private SoundEngine soundEngine;
+	private SoundManager soundManager;
+
+	@Inject
+	private EventBus eventBus;
 
 
 	@Override
 	protected void startUp() throws Exception
 	{
+		eventBus.register(soundManager);
+
 		executor.submit(() -> {
 			SoundFileManager.ensureDownloadDirectoryExists();
 			SoundFileManager.downloadAllMissingSounds(okHttpClient);
@@ -73,36 +81,31 @@ public class MemeEffectsPlugin extends Plugin
 	@Override
 	protected void shutDown() throws Exception
 	{
-
+		eventBus.unregister(soundManager);
 	}
 
 	@Subscribe
-	public void onAnimationChanged(AnimationChanged animationChanged){
-		currentAnimationID = animationChanged.getActor().getAnimation();
-		if(config.enableMortarPestleBonk()){
-			tryPlayMortarPestleBonk(currentAnimationID);
-		}
-	}
-
-	public void tryPlayMortarPestleBonk(int currentAnimationID){
-		if(currentAnimationID == AnimationIds.MORTAR_AND_PESTLE_ANIMATION_ID){
-			soundEngine.playClip(Sound.MORTAR_PESTLE_BONK);
-		}
-	}
-
-	public void tryRemoveMortarPestleSound(SoundEffectPlayed soundEffectPlayed) {
-		if (soundEffectPlayed.getSoundId() == SoundEffectIds.MORTAR_AND_PESTLE && currentAnimationID == AnimationIds.MORTAR_AND_PESTLE_ANIMATION_ID) {
-			soundEffectPlayed.consume();
-		}
-	}
-
-	@Subscribe
-	public void onSoundEffectPlayed(SoundEffectPlayed soundEffectPlayed)
+	public void onOverheadTextChanged(OverheadTextChanged textChanged)
 	{
-		if(config.enableMortarPestleBonk()){
-			tryRemoveMortarPestleSound(soundEffectPlayed);
+		if(textChanged.getOverheadText().equals("Smashing!"))
+		{
+			textChanged.getActor().setOverheadText("Rock and Stone!");
 		}
 	}
+
+	@Subscribe
+	public void onChatMessage(ChatMessage chatMessage)
+	{
+		if(chatMessage.getMessage().equals("Smashing!"))
+		{
+			MessageNode messageNode = chatMessage.getMessageNode();
+			messageNode.setValue("Rock and Stone");
+
+			chatMessage.setMessageNode(messageNode);
+		}
+	}
+
+
 
 	@Provides
 	MemeEffectsPluginConfig provideConfig(ConfigManager configManager)

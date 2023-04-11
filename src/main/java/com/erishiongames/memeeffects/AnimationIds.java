@@ -24,10 +24,21 @@
  */
 package com.erishiongames.memeeffects;
 
-public class AnimationIds {
+public enum AnimationIds {
 
-    public static final int MORTAR_AND_VIAL_ANIMATION_ID = 363;
-    public static final int MORTAR_AND_PESTLE_ANIMATION_ID = 364;
+    MORTAR_AND_VIAL(363),
+    MORTAR_AND_PESTLE(364),
+	;
 
+	private final int animationID;
 
+	AnimationIds(int animationID)
+	{
+		this.animationID = animationID;
+	}
+
+	public int getAnimationID()
+	{
+		return animationID;
+	}
 }
